@@ -7,14 +7,30 @@
 </head>
 <body>
 	<main>
-		<input type="radio" name="controller" value="start" class="intents">
-		<input type="radio" name="controller" value="foo" class="defqon">
-		<input type="radio" name="controller" value="bar" class="decibel">
+		<input id="intents" type="radio" name="controller" class="intents">
+		<input id="defqon" type="radio" name="controller" class="defqon">
+		<input id="decibel" type="radio" name="controller" class="decibel">
 		<section class="timeline-view">
-			<div class="character">
-			</div>
+			<section class="introduction">
+				<label for="intents">Intents</label>
+			</section>
+			<section class="festival festival__intents">
+				<picture class="fixed-ratio" style="padding-bottom:41%;">
+    				<img alt="Visits spike at 4K around lunch time." src="./img/intentsfestival-bgimg.jpg" class="fixed-ratio-content">
+				</picture>
+				<div>
+					<h1>Intents festival</h1>
+					<label for="defqon">Defqon</label>
+				</div>
+			</section>
+			<section class="festival festival__defqon">
+				<label for="decibel">Decibel</label>
+			</section>
+			<section class="festival festival__decibel">
+				<label for="beginning">Beginning</label>
+			</section>
 			<section class="road">
-
+				<img src="gifs/hakken.gif" alt="">
 			</section>
 		</section>
 	</main>

@@ -1,0 +1,101 @@
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+svg {
+	position: absolute;
+	top: 0;
+}
+svg g {
+	position: absolute;
+	top: 0;
+}
+
+section
+{
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background: url(../img/thunderdomebg.jpg);
+}
+
+img {
+	mix-blend-mode: luminosity;
+}
+
+section:before
+{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../img/thunderdomebg.jpg);
+	opacity: .5;
+	mix-blend-mode: hard-light;
+	animation: animate .2s linear infinite;
+}
+
+path {
+stroke-dasharray: 2;
+animation: dash 5s infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes animate
+{
+	0%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(0deg);
+	}
+	10%
+	{
+		background-position: 5px 0;
+	}
+	20%
+	{
+		background-position: -5px 0;
+	}
+	30%
+	{
+		background-position: 15px 0;
+	}
+	40%
+	{
+		background-position: -5px 0;
+	}
+	50%
+	{
+		background-position: -25px 0;
+	}
+	60%
+	{
+		background-position: -50px 0;
+	}
+	70%
+	{
+		background-position: 0 -0px;
+	}
+	80%
+	{
+		background-position: -60px -20px;
+	}
+	81%
+	{
+		background-position: 0 0;
+	}
+	100%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(360deg);
+	}
+}

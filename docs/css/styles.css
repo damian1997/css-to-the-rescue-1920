@@ -6,138 +6,102 @@ body {
 main {
 	position: relative;
 	height: 100vh;
-	width: calc(100vw * 4);
-}
-
-/* Image handling */
-.fixed-ratio {
-    display: block;
-    position: relative;
-    height: 0;
-    overflow: hidden;
-}
-
-.fixed-ratio-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-width: inherit;
-}
-
-.fixed-ratio-16by9 {
-    /* ratio: 100% / (16 / 9) = */
-    padding-bottom: 61%;
-}
-
-/* radios */
-[type=radio] {
-	display: none;
-}
-
-.timeline-view {
-	position: relative;
-	height: 100%;
-	width: 100%;
-}
-
-.timeline-view .road {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 400px;
-	width: 100%;
-	background: #000;
-	overflow-y: scroll;
-}
-.timeline-view .road img {
-	position: absolute;
-	height: 50%;
-	left: -20vw;
-	transform: rotateY(0deg);
-	animation: myfirst 30s;
-	animation-name: moveperson;
-	animation-fill-mode: both;
-	animation-direction: normal;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-}
-.intents:checked ~ .timeline-view {
-	animation-name: gotointentsview;
-	animation-duration: 2s;
-	animation-timing-function: linear;
-	animation-fill-mode: forwards;
-}
-
-.defqon:checked ~ .timeline-view {
-	animation-name: gotodefqonview;
-	animation-duration: 2s;
-	animation-timing-function: linear;
-	animation-fill-mode: forwards;
-}
-
-/* Festival containers */
-.festival {
-	position: absolute;
-	top: 0;
-	height: 100%;
 	width: 100vw;
 }
-.festival div {
+
+main > section
+{
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background: url(../img/thunderdomebg.jpg);
+}
+
+main > section:before
+{
+	content: '';
 	position: absolute;
-	z-index: 10;
 	top: 0;
-	background: red;
-}
-.festival picture {
-}
-
-.festival:nth-child(odd) div {
-	background: green;
-}
-
-.festival__intents {
-	left: 100vw;
-}
-.festival__intents picture {
-
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../img/thunderdomebg.jpg);
+	opacity: .5;
+	mix-blend-mode: hard-light;
+	animation: animate .2s linear infinite;
 }
 
-.festival__defqon {
-	left: 200vw;
-	background: green;
+svg {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
-.festival__decibel {
-	display: none;
+svg g {
+	width: 100%;
+	height: 100%;
 }
 
-/* Keyframes */
-@keyframes gotointentsview {
-	from{transform: translateX(0)}
-	to{transform: translateX(-100vw)}
-}
-@keyframes gotodefqonview {
-	from{transform: translateX(-100vw)}
-	to{transform: translateX(-200vw)}
+svg path {
+	stroke-dasharray: 2;
+	animation: dash 5s infinite;
+	fill: #000;
+	width: 100%;
+	height: 100%;
 }
 
-@keyframes moveperson {
-	0% {
-    left: 0%;
-    transform: rotateY(0deg);
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
   }
-  49.5% {
-    left: 90%;
-    transform: rotateY(0deg);
-  }
-  50.5% {
-    left: 90%;
-    transform: rotateY(180deg);
-  }
-  100% {
-    left: 0%;
-    transform: rotateY(180deg);
-  }
+}
+
+@keyframes animate
+{
+	0%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(0deg);
+	}
+	10%
+	{
+		background-position: 5px 0;
+	}
+	20%
+	{
+		background-position: -5px 0;
+	}
+	30%
+	{
+		background-position: 15px 0;
+	}
+	40%
+	{
+		background-position: -5px 0;
+	}
+	50%
+	{
+		background-position: -25px 0;
+	}
+	60%
+	{
+		background-position: -50px 0;
+	}
+	70%
+	{
+		background-position: 0 -0px;
+	}
+	80%
+	{
+		background-position: -60px -20px;
+	}
+	81%
+	{
+		background-position: 0 0;
+	}
+	100%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(360deg);
+	}
 }

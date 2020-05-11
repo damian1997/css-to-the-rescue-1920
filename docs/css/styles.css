@@ -1,53 +1,448 @@
 :root {
+  --flash-speed: 0.2s;
+  --strobe-speed: 100ms;
+  --laser-speed: 0.5s;
+  --skew-speed: 0.5s;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --flash-speed: 1s;
+    --strobe-speed: 500ms;
+    --laser-speed: 1s;
+    --skew-speed: 4s;
+  }
+}
+
+body, html {
+  height: 100%;
+  cursor: url('../images/xtcsmall.png'), auto;
+}
+
 body {
-	margin: 0;
-}
-main {
-	position: relative;
-	height: 100vh;
-	width: 100vw;
+  overflow: hidden;
+  font-family: 'roboto', sans-serif;
+  font-size: 16px;
 }
 
-main > section
-{
-	position: relative;
-	width: 100%;
-	height: 100vh;
-	background: url(../img/thunderdomebg.jpg);
+main  {
+  height: 100%;
 }
 
-main > section:before
-{
-	content: '';
+/* Room container */
+main > section {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 400px;
+}
+
+/* Default room piece styling */
+main > section > div {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  width: 6em;
+  height: 5em;
+  left: 50%;
+  top: 50%;
+}
+
+/* FLoor */
+main > section > div:nth-child(1) {
+  position: relative;
+	background: url('../gifs/distortion-2.gif');
+  background-size: cover;
+  background-size: 99%;
+  border: 1px solid black;
+  transform: translate(-50%, 1.5em) rotateX(90deg);
+  transform-origin: center top;
+}
+
+
+main > section > div:nth-child(1):before {
+  content: '';
 	position: absolute;
 	top: 0;
-	left: 0;
+	right: 0;
 	width: 100%;
 	height: 100%;
-	background: url(../img/thunderdomebg.jpg);
+	background: url('../gifs/distortion-2.gif');
+  background-size: cover;
 	opacity: .5;
 	mix-blend-mode: hard-light;
-	animation: animate .2s linear infinite;
+	animation: distortion .2s linear infinite;
 }
 
-svg {
-	position: absolute;
-	top: 0;
-	left: 0;
+/* Leftwall */
+main > section > div:nth-child(2) {
+  height: 3em !important;
+  background: #000;
+  transform: translate(-150%, -50%) rotateY(90deg);
+  transform-origin: right center;
 }
 
-svg g {
-	width: 100%;
-	height: 100%;
+main > section > div:nth-child(2):hover:before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  animation: flash var(--flash-speed) infinite;
 }
 
-svg path {
-	stroke-dasharray: 2;
-	animation: dash 5s infinite;
-	fill: #000;
-	width: 100%;
-	height: 100%;
+main > section > div:nth-child(2) img {
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  mix-blend-mode: luminosity;
+}
+
+main > section > div:nth-child(2) img:nth-of-type(1) {
+  right: 0;
+}
+main > section > div:nth-child(2) img:nth-of-type(2) {
+  right: 50px;
+}
+main > section > div:nth-child(2) img:nth-of-type(3) {
+  right: 100px;
+}
+main > section > div:nth-child(2) img:nth-of-type(4) {
+  right: 150px;
+}
+main > section > div:nth-child(2) img:nth-of-type(5) {
+  right: 200px;
+}
+main > section > div:nth-child(2) img:nth-of-type(6) {
+  right: 250px;
+}
+
+main > section > div:nth-child(2):before {
+  position: absolute;
+  bottom: -30px;
+  left: 194px;
+  content: '';
+  display: inline-block;
+  width: 450px;
+  height: 100px;
+}
+
+/* Rightwall */
+main > section > div:nth-child(3) {
+  height: 3em !important;
+  background: #000;
+  transform: translate(50%, -50%) rotateY(-90deg);
+  transform-origin: left center;
+}
+
+main > section > div:nth-child(3):hover:before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  animation: flash var(--flash-speed) infinite;
+}
+
+main > section > div:nth-child(3):before {
+}
+
+main > section > div:nth-child(3) img {
+  position: absolute;
+  bottom: 0;
+  right: 100px;
+  height: 100px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  mix-blend-mode: luminosity;
+}
+
+main > section > div:nth-child(3) img:nth-of-type(1) {
+  left: 0;
+}
+main > section > div:nth-child(3) img:nth-of-type(2) {
+  left: 50px;
+}
+main > section > div:nth-child(3) img:nth-of-type(3) {
+  left: 100px;
+}
+main > section > div:nth-child(3) img:nth-of-type(4) {
+  left: 150px;
+}
+main > section > div:nth-child(3) img:nth-of-type(5) {
+  left: 200px;
+}
+main > section > div:nth-child(3) img:nth-of-type(6) {
+  left: 250px;
+}
+
+
+/* center */
+main > section > div:nth-child(4) {
+  height: 3em !important;
+  background: #ddd;
+  transform: translate(-50%, -50%);
+}
+
+/* Beam color controlers */
+main > section > div:nth-child(4) > input, main > section > div:nth-child(4) > label {
+  z-index: 100;
+}
+
+main > section > div:nth-child(4) > input {
+  display: none;
+}
+
+main > section > div:nth-child(4) > svg {
+  position: absolute;
+}
+
+main > section > div:nth-child(4) > svg {
+stroke-dasharray: 2;
+animation: dash 5s infinite;
+}
+
+main > section > div:nth-child(4) > label {
+  position: relative;
+  top: 104px;
+  left: 0;
+  display: inline-block;
+  font-size: 1.5rem;
+}
+
+main > section > div:nth-child(4) > label:nth-of-type(1) {
+  background: white;
+}
+main > section > div:nth-child(4) > label:nth-of-type(2) {
+  background: #4FFF3E;
+}
+main > section > div:nth-child(4) > label:nth-of-type(3) {
+  background: #59C7FF;
+}
+
+
+/*White beams*/
+main > section > div:nth-child(4) > #white:checked ~ div > div:nth-child(1):before {
+  animation: leftbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #white:checked ~ div > div:nth-child(2):before {
+  animation: middlefirstbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #white:checked ~ div > div:nth-child(3):before {
+  animation: middlesecondbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #white:checked ~ div > div:nth-child(4):before {
+  animation: rightbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+
+/* Green beams */
+main > section > div:nth-child(4) > #green:checked ~ div > div:nth-child(1):before {
+  animation: leftbeam var(--laser-speed) infinite, strobegreen var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #green:checked ~ div > div:nth-child(2):before {
+  animation: middlefirstbeam var(--laser-speed) infinite, strobegreen var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #green:checked ~ div > div:nth-child(3):before {
+  animation: middlesecondbeam var(--laser-speed) infinite, strobegreen var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #green:checked ~ div > div:nth-child(4):before {
+  animation: rightbeam var(--laser-speed) infinite, strobegreen var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+
+/*Blue beams*/
+main > section > div:nth-child(4) > #blue:checked ~ div > div:nth-child(1):before {
+  animation: leftbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #blue:checked ~ div > div:nth-child(2):before {
+  animation: middlefirstbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #blue:checked ~ div > div:nth-child(3):before {
+  animation: middlesecondbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+main > section > div:nth-child(4) > #blue:checked ~ div > div:nth-child(4):before {
+  animation: rightbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+/* Laser container */
+main > section > div:nth-child(4) > div  {
+  perspective: 400px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 20px;
+  left: 238px;
+  content: '';
+  display: inline-block;
+  width: 400px;
+  height: 20px;
+  background: black;
+}
+
+/* Lasers laser 1 left beam */
+main > section > div:nth-child(4) > div > div:nth-child(1):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(-136px, -330px) rotateX(-79deg);
+
+  animation: leftbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+/* Lasers laser 2 middle first beam */
+main > section > div:nth-child(4) > div > div:nth-child(2):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(0, -194px) rotateX(-107deg);
+
+  animation: middlefirstbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+
+}
+
+/* Lasers laser 2 middle second beam */
+main > section > div:nth-child(4) > div > div:nth-child(3):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(197px, -194px) rotateX(-107deg);
+
+  animation: middlesecondbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+
+}
+
+
+/* Lasers laser 3 right beam */
+main > section > div:nth-child(4) > div > div:nth-child(4):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 250px;
+  height: 565px;
+  top: 0;
+  transform: translate(290px, -330px) rotateX(-79deg);
+
+  animation: rightbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+/* ceiling */
+main > section > div:nth-child(5) {
+  transform: translate(-50%, -5.5em) rotateX(-90deg);
+  transform-origin: bottom center;
+  background: #000;
+  background-size: 150%;
+  z-index: -10;
+}
+
+main > section > div:nth-child(5) img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Skewing walls */
+main > section > div:nth-child(5) > section {
+  position: relative;
+  left: 0;
+}
+main > section > div:nth-child(5) > section > div {
+  position: relative;
+  margin-right: 10px;
+  width: 10px;
+  height: 10px;
+  background: #59C7FF;
+  left: 5px;
+  bottom: 150px;
+  animation: skew var(--skew-speed) infinite;
+}
+
+@keyframes leftbeam {
+  from {
+    transform: translate(-136px, -330px) rotateX(-79deg);
+  }
+  to {
+    transform: translate(-136px, -171px) rotateX(-112deg);
+  }
+}
+
+@keyframes middlebeam {
+
+}
+
+@keyframes rightbeam {
+  from {
+    transform: translate(290px, -330px) rotateX(-79deg);
+  }
+  to {
+    transform: translate(290px, -171px) rotateX(-112deg);
+  }
+}
+
+@keyframes middlefirstbeam {
+  from {
+    transform: translate(0, -194px) rotateX(-107deg);
+  }
+  to {
+    transform: translate(0, -335px) rotateX(-78deg);
+  }
+}
+
+@keyframes middlesecondbeam {
+  from {
+    transform: translate(197px, -194px) rotateX(-107deg);
+  }
+  to {
+    transform: translate(197px, -336px) rotateX(-78deg);
+  }
+}
+
+@keyframes strobe {
+  50% {
+    background: repeating-linear-gradient(
+    90deg,
+    #fff,
+    transparent 10px,
+    #fff 10px,
+    transparent 20px
+    );
+  }
+}
+
+@keyframes strobegreen {
+  50% {
+    background: repeating-linear-gradient(
+    90deg,
+    #4FFF3E,
+    transparent 10px,
+    #4FFF3E 10px,
+    transparent 20px
+    );
+  }
 }
 
 @keyframes dash {
@@ -56,12 +451,10 @@ svg path {
   }
 }
 
-@keyframes animate
-{
+@keyframes distortion {
 	0%
 	{
 		background-position: 0 0;
-		filter: hue-rotate(0deg);
 	}
 	10%
 	{
@@ -102,6 +495,72 @@ svg path {
 	100%
 	{
 		background-position: 0 0;
-		filter: hue-rotate(360deg);
 	}
+}
+
+@keyframes strobeblue {
+  50% {
+    background: repeating-linear-gradient(
+    90deg,
+    #59C7FF,
+    transparent 10px,
+    #59C7FF 10px,
+    transparent 20px
+    );
+  }
+}
+
+@keyframes skew {
+  0% {
+    transform: skew(10deg, 10deg)
+  }
+  25% {
+    transform: skew(120deg, 120deg);
+  }
+  50% {
+    transform: skew(10deg, 10deg)
+  }
+  100% {
+    transform: skew(-120deg, -120deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+}
+
+
+@keyframes flash {
+  from {
+    background: #000;
+  }
+  to {
+    background: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  img {
+    display: none;
+  }
+
+  @keyframes skew {
+    from {
+      transform: skew(10deg, 10deg)
+    }
+    to {
+      transform: skew(120deg, 120deg);
+    }
+  }
+
+  main > section > div:nth-child(1) {
+    position: relative;
+    background: #000;
+    border: 1px solid black;
+    transform: translate(-50%, 1.5em) rotatex(90deg);
+    transform-origin: center top;
+  }
+  main > section > div:nth-child(1):before {
+    background: none;
+    animation: none;
+  }
 }

@@ -21,5 +21,5 @@
 * Checkbox/radio-button hack
 * Selectors
   * ~
-  * >
+  * ( > )
 * Chaining pseudo classes

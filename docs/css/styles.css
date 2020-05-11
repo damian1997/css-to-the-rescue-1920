@@ -181,7 +181,7 @@ main > section > div:nth-child(3) img:nth-of-type(6) {
 /* center */
 main > section > div:nth-child(4) {
   height: 3em !important;
-  background: #ddd;
+  background: #000;
   transform: translate(-50%, -50%);
 }
 
@@ -196,6 +196,11 @@ main > section > div:nth-child(4) > input {
 
 main > section > div:nth-child(4) > svg {
   position: absolute;
+}
+
+path {
+  stroke: #4FFF3E;
+  fill: #fff;
 }
 
 main > section > div:nth-child(4) > svg {

@@ -213,17 +213,20 @@ main > section > div:nth-child(4) > label {
   top: 104px;
   left: 0;
   display: inline-block;
+  padding: 10px;
   font-size: 1.5rem;
 }
 
 main > section > div:nth-child(4) > label:nth-of-type(1) {
   background: white;
+  border-radius: 4px 0 0 4px;
 }
 main > section > div:nth-child(4) > label:nth-of-type(2) {
   background: #4FFF3E;
 }
 main > section > div:nth-child(4) > label:nth-of-type(3) {
   background: #59C7FF;
+  border-radius: 0 4px 4px 0;
 }
 
 
@@ -298,6 +301,20 @@ main > section > div:nth-child(4) > div  {
 }
 
 /* Lasers laser 1 left beam */
+main > section > div:nth-child(4) > div > div:nth-child(1):after {
+  mix-blend-mode: difference;
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(-136px, -330px) rotateX(-79deg);
+
+  animation: leftbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
 main > section > div:nth-child(4) > div > div:nth-child(1):before {
   content: '';
   position: absolute;
@@ -312,6 +329,20 @@ main > section > div:nth-child(4) > div > div:nth-child(1):before {
 }
 
 /* Lasers laser 2 middle first beam */
+main > section > div:nth-child(4) > div > div:nth-child(2):after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(0, -194px) rotateX(-107deg);
+
+  animation: middlefirstbeam var(--laser-speed) infinite, strobeblack var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+
+}
+
 main > section > div:nth-child(4) > div > div:nth-child(2):before {
   content: '';
   position: absolute;
@@ -336,6 +367,20 @@ main > section > div:nth-child(4) > div > div:nth-child(3):before {
   top: 0;
   transform: translate(197px, -194px) rotateX(-107deg);
 
+  animation: middlesecondbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+
+}
+
+main > section > div:nth-child(4) > div > div:nth-child(3):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 565px;
+  top: 0;
+  transform: translate(197px, -194px) rotateX(-107deg);
+
   animation: middlesecondbeam var(--laser-speed) infinite, strobe var(--strobe-speed) steps(1,end) infinite;
   animation-direction: alternate;
 
@@ -343,6 +388,45 @@ main > section > div:nth-child(4) > div > div:nth-child(3):before {
 
 
 /* Lasers laser 3 right beam */
+main > section > div:nth-child(4) > div > div:nth-child(4):after{
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 250px;
+  height: 565px;
+  top: 0;
+  transform: translate(290px, -330px) rotateX(-79deg);
+
+  animation: rightbeam var(--laser-speed) infinite, strobeblue var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+main > section > div:nth-child(4) > div > div:nth-child(4):before:before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 250px;
+  height: 565px;
+  top: 0;
+  transform: translate(290px, -330px) rotateX(-79deg);
+
+  animation: rightbeam var(--laser-speed) infinite, strobegreen var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
+main > section > div:nth-child(4) > div > div:nth-child(4):before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 250px;
+  height: 565px;
+  top: 0;
+  transform: translate(290px, -330px) rotateX(-79deg);
+
+  animation: rightbeam var(--laser-speed) infinite, strobeblack var(--strobe-speed) steps(1,end) infinite;
+  animation-direction: alternate;
+}
+
 main > section > div:nth-child(4) > div > div:nth-child(4):before {
   content: '';
   position: absolute;
@@ -514,6 +598,19 @@ main > section > div:nth-child(5) > section > div {
     );
   }
 }
+
+@keyframes strobeblack {
+  50% {
+    background: repeating-linear-gradient(
+    90deg,
+    #000,
+    transparent 10px,
+    #000 10px,
+    transparent 20px
+    );
+  }
+}
+
 
 @keyframes skew {
   0% {
